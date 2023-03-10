@@ -106,10 +106,11 @@ public class maxSumOfContiguousSubArrayK {
     public static int longestSubstringWithSameLettersAfterReplacements(String str, int k) {
         int windowStart = 0;
         int bestLength = Integer.MIN_VALUE; // 4
-        int mostFrequentCharacterSize = 0; // 2
+        int mostFrequentCharacterSize = 0; // 2    Notice the freq is not tied to any particular identity. It is tied
+                                                // to the most freq element in current window whatever it was.
 
         Map<Character, Integer> freqMap = new HashMap<>();
-        // "aabccbb"     freqMap = {a: 2, b:1, c:1 }
+        // "aabccbb"     freqMap = {a: 1, b:2, c:2 }
         for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
             char rightChar = str.charAt(windowEnd);
             freqMap.put(rightChar, freqMap.getOrDefault(rightChar, 0) + 1);
