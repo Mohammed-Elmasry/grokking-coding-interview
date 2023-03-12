@@ -107,7 +107,7 @@ public class maxSumOfContiguousSubArrayK {
         int windowStart = 0;
         int bestLength = Integer.MIN_VALUE; // 5
         int mostFrequentCharacterSize = 0; // 3 // Notice the freq is not tied to any particular identity. It is tied
-                                                // to the most freq element in current window whatever it was.
+        // to the most freq element in current window whatever it was.
 
         Map<Character, Integer> freqMap = new HashMap<>();
         // "aabccbb"     freqMap = { b:3, c:2 }
@@ -122,6 +122,26 @@ public class maxSumOfContiguousSubArrayK {
             if (windowEnd - windowStart + 1 - mostFrequentCharacterSize > k) {
                 char leftChar = str.charAt(windowStart);
                 freqMap.put(leftChar, freqMap.get(leftChar) - 1);
+                windowStart++;
+            }
+
+            bestLength = Math.max(bestLength, windowEnd - windowStart + 1);
+        }
+
+        return bestLength;
+    }
+
+    public static int longestSubarrayWithOnesAfterReplacement(int[] nums, int k) {
+        int bestLength = Integer.MIN_VALUE;
+        int windowStart = 0;
+        int onesCount = 0;
+
+        for (int windowEnd = 0; windowEnd < nums.length; windowEnd++) {
+            if (nums[windowEnd] == 1)
+                onesCount++;
+
+            if (windowEnd - windowStart + 1 - onesCount > k) { // you need to shrink
+                if (nums[windowStart] == 1) onesCount--;
                 windowStart++;
             }
 
