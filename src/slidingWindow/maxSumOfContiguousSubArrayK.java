@@ -150,4 +150,37 @@ public class maxSumOfContiguousSubArrayK {
 
         return bestLength;
     }
+
+    public static boolean permutationInString(String str, String pattern) {
+        int matched = 0;
+        int windowStart = 0;
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (char c : pattern.toCharArray())
+            map.put(c, map.getOrDefault(c, 0) + 1);
+
+
+        for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+            char rightChar = str.charAt(windowEnd);
+            if (map.containsKey(rightChar)) {
+                map.put(rightChar, map.getOrDefault(rightChar, 0) - 1);
+                if (map.get(rightChar) == 0) matched++;
+            }
+
+            if (matched == map.size()) return true;
+
+            if (windowEnd >= pattern.length() - 1) { // need to shrink from the left
+                char leftChar = str.charAt(windowStart);
+                if (map.containsKey(leftChar)){
+                    if (map.get(leftChar) == 0)
+                        matched--;
+                    map.put(leftChar, map.getOrDefault(leftChar, 0) + 1);
+                }
+                windowStart++;
+            }
+        }
+
+        return false;
+    }
 }
