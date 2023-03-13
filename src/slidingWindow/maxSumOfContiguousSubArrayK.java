@@ -1,10 +1,7 @@
 package slidingWindow;
 
 import java.io.CharArrayReader;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class maxSumOfContiguousSubArrayK {
     public static int calculateContiguousSubArrayMaxSum(int[] input, int k) {
@@ -172,7 +169,7 @@ public class maxSumOfContiguousSubArrayK {
 
             if (windowEnd >= pattern.length() - 1) { // need to shrink from the left
                 char leftChar = str.charAt(windowStart);
-                if (map.containsKey(leftChar)){
+                if (map.containsKey(leftChar)) {
                     if (map.get(leftChar) == 0)
                         matched--;
                     map.put(leftChar, map.getOrDefault(leftChar, 0) + 1);
@@ -182,5 +179,40 @@ public class maxSumOfContiguousSubArrayK {
         }
 
         return false;
+    }
+
+    public static List<Integer> findAllAnagramsOfPatternWithinString(String str, String pattern) {
+        int windowStart = 0;
+        int matched = 0;
+        List<Integer> res = new ArrayList<>();
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (char c : pattern.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+            char rightChar = str.charAt(windowEnd);
+
+            if (map.containsKey(rightChar)) {
+                map.put(rightChar, map.getOrDefault(rightChar, 0) - 1);
+                if (map.get(rightChar) == 0) matched++;
+            }
+
+            if (matched == map.size()) {
+                res.add(windowStart);
+            }
+
+            if (windowEnd >= pattern.length() - 1) {
+                char leftChar = str.charAt(windowStart++);
+                if (map.containsKey(leftChar)) {
+                    if (map.get(leftChar) == 0) matched--;
+                    map.put(leftChar, map.get(leftChar) + 1);
+                }
+            }
+        }
+
+        return res;
     }
 }

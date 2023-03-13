@@ -1,10 +1,12 @@
 import slidingWindow.maxSumOfContiguousSubArrayK;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] $args) {
-        String input = "aaacb";
-        String pattern = "abc";
-        boolean res = maxSumOfContiguousSubArrayK.permutationInString(input, pattern);
+        String input = "ppqp";
+        String pattern = "pq";
+        List<Integer> res = maxSumOfContiguousSubArrayK.findAllAnagramsOfPatternWithinString(input, pattern);
 
         System.out.println(res);
     }
