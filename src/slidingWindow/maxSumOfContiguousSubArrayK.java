@@ -216,40 +216,75 @@ public class maxSumOfContiguousSubArrayK {
         return res;
     }
 
+//    public static String minimumWindowSubstring(String str, String pattern) {
+//        int windowStart = 0;
+//        int matched = 0;
+//        int minLength = str.length() + 1;
+//        int subStrStart = 0;
+//
+//        Map<Character, Integer> charFreqMap = new HashMap<>();
+//
+//        for (char chr : pattern.toCharArray())
+//            charFreqMap.put(chr, charFreqMap.getOrDefault(chr, 0) + 1);
+//
+//        for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+//            char rightChar = str.charAt(windowEnd);
+//            if (charFreqMap.containsKey(rightChar)) {
+//                charFreqMap.put(rightChar, charFreqMap.get(rightChar) - 1);
+//                if (charFreqMap.get(rightChar) == 0)
+//                    matched++;
+//            }
+//
+//            while (matched == pattern.length()) {
+//                if (minLength > windowEnd - windowStart + 1) {
+//                    minLength = windowEnd - windowStart + 1;
+//                    subStrStart = windowStart; // start index of the new best window
+//                }
+//
+//                char leftChar = str.charAt(windowStart++);
+//                if (charFreqMap.containsKey(leftChar)) {
+//                    if (charFreqMap.get(leftChar) == 0)
+//                        matched--;
+//                    charFreqMap.put(leftChar, charFreqMap.get(leftChar) + 1);
+//                }
+//            }
+//        }
+//
+//        return minLength > str.length() ? "" : str.substring(subStrStart, subStrStart + minLength);
+//    }
+
     public static String minimumWindowSubstring(String str, String pattern) {
         int windowStart = 0;
         int matched = 0;
-        int minLength = str.length() + 1;
-        int subStrStart = 0;
+        String res = str;
 
-        Map<Character, Integer> charFreqMap = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<>();
 
-        for (char chr : pattern.toCharArray())
-            charFreqMap.put(chr, charFreqMap.getOrDefault(chr, 0) + 1);
+        for (char c : pattern.toCharArray())
+            map.put(c, map.getOrDefault(c, 0) + 1);
 
         for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
             char rightChar = str.charAt(windowEnd);
-            if (charFreqMap.containsKey(rightChar)) {
-                charFreqMap.put(rightChar, charFreqMap.get(rightChar) - 1);
-                if (charFreqMap.get(rightChar) == 0)
+            if (map.containsKey(rightChar)) {
+                map.put(rightChar, map.get(rightChar) - 1);
+                if (map.get(rightChar) == 0)
                     matched++;
             }
 
-            while (matched == pattern.length()) {
-                if (minLength > windowEnd - windowStart + 1) {
-                    minLength = windowEnd - windowStart + 1;
-                    subStrStart = windowStart; // start index of the new best window
-                }
+            while (matched == map.size()) {
+                // a match was found
+                String currentWindow = str.substring(windowStart, windowEnd + 1);
+                if (res.length() > currentWindow.length())
+                    res = currentWindow;
 
                 char leftChar = str.charAt(windowStart++);
-                if (charFreqMap.containsKey(leftChar)) {
-                    if (charFreqMap.get(leftChar) == 0)
-                        matched--;
-                    charFreqMap.put(leftChar, charFreqMap.get(leftChar) + 1);
+                if (map.containsKey(leftChar)) {
+                    if (map.get(leftChar) == 0) matched--;
+                    map.put(leftChar, map.get(leftChar) + 1);
                 }
             }
         }
 
-        return minLength > str.length() ? "" : str.substring(subStrStart, subStrStart + minLength);
+        return res.length() < str.length() ? res : "";
     }
 }
