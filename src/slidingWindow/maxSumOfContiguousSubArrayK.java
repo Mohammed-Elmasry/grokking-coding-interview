@@ -287,4 +287,38 @@ public class maxSumOfContiguousSubArrayK {
 
         return res.length() < str.length() ? res : "";
     }
+
+    public static List<Integer> findWordConcatenation(String str, String[] words) {
+
+        Map<String, Integer> wordFreqMap = new HashMap<>();
+        for (String word : words)
+            wordFreqMap.put(word, wordFreqMap.getOrDefault(word, 0) + 1);
+
+        List<Integer> res = new ArrayList<Integer>();
+        int wordCount = words.length;
+        int wordLength = words[0].length();
+
+        int windowSize = wordCount * wordLength;
+        for (int i = 0; i < str.length() - windowSize + 1; i++) { // while there is enough string to contain a whole window [number of words X word length]
+            Map<String, Integer> wordsSeen = new HashMap<>();
+
+            for (int j = 0; j < words.length; j++) { // for every word
+                int nextWordIndex = i + j * wordLength;
+
+                String word = str.substring(nextWordIndex, nextWordIndex + wordLength);
+
+                if (!wordFreqMap.containsKey(word)) break;
+
+                wordsSeen.put(word, wordsSeen.getOrDefault(word, 0) + 1);
+
+                if (wordsSeen.get(word) > wordFreqMap.get(word)) break;
+
+                if (j + 1 == wordCount) { // perfect window
+                    res.add(i); // add beginning of the window that contains the right concatenated string
+                }
+            }
+        }
+
+        return res;
+    }
 }
