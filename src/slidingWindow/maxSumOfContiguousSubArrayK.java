@@ -288,37 +288,70 @@ public class maxSumOfContiguousSubArrayK {
         return res.length() < str.length() ? res : "";
     }
 
+//    public static List<Integer> findWordConcatenation(String str, String[] words) {
+//
+//        Map<String, Integer> wordFreqMap = new HashMap<>();
+//        for (String word : words)
+//            wordFreqMap.put(word, wordFreqMap.getOrDefault(word, 0) + 1);
+//
+//        List<Integer> res = new ArrayList<Integer>();
+//        int wordCount = words.length;
+//        int wordLength = words[0].length();
+//
+//        int windowSize = wordCount * wordLength;
+//        for (int i = 0; i < str.length() - windowSize + 1; i++) { // while there is enough string to contain a whole window [number of words X word length]
+//            Map<String, Integer> wordsSeen = new HashMap<>();
+//
+//            for (int j = 0; j < words.length; j++) { // for every word
+//                int nextWordIndex = i + j * wordLength;
+//
+//                String word = str.substring(nextWordIndex, nextWordIndex + wordLength);
+//
+//                if (!wordFreqMap.containsKey(word)) break;
+//
+//                wordsSeen.put(word, wordsSeen.getOrDefault(word, 0) + 1);
+//
+//                if (wordsSeen.get(word) > wordFreqMap.get(word)) break;
+//
+//                if (j + 1 == wordCount) { // perfect window
+//                    res.add(i); // add beginning of the window that contains the right concatenated string
+//                }
+//            }
+//        }
+//
+//        return res;
+//    }
+
     public static List<Integer> findWordConcatenation(String str, String[] words) {
+        List<Integer> res = new ArrayList<>();
+        HashMap<String, Integer> wordsRef = new HashMap<>();
 
-        Map<String, Integer> wordFreqMap = new HashMap<>();
+
         for (String word : words)
-            wordFreqMap.put(word, wordFreqMap.getOrDefault(word, 0) + 1);
+            wordsRef.put(word, wordsRef.getOrDefault(word, 0) + 1);
 
-        List<Integer> res = new ArrayList<Integer>();
         int wordCount = words.length;
         int wordLength = words[0].length();
-
         int windowSize = wordCount * wordLength;
-        for (int i = 0; i < str.length() - windowSize + 1; i++) { // while there is enough string to contain a whole window [number of words X word length]
-            Map<String, Integer> wordsSeen = new HashMap<>();
 
-            for (int j = 0; j < words.length; j++) { // for every word
-                int nextWordIndex = i + j * wordLength;
+        for (int i = 0; i < str.length() - windowSize + 1; i++) {
+            // make hash for words you've seen in current window
+            Map<String, Integer> seenWords = new HashMap<>();
+            // go word by word and check it
+            for (int j = 0; j < wordCount; j++) {
+                int nextWordIndex = i + j * wordLength; // i to respect the boundary of the window
+                String currentWord = str.substring(nextWordIndex, nextWordIndex + wordLength);
+                if (!wordsRef.containsKey(currentWord)) break;
 
-                String word = str.substring(nextWordIndex, nextWordIndex + wordLength);
+                seenWords.put(currentWord, seenWords.getOrDefault(currentWord, 0) + 1);
 
-                if (!wordFreqMap.containsKey(word)) break;
+                if (seenWords.get(currentWord) > wordsRef.get(currentWord)) break;
 
-                wordsSeen.put(word, wordsSeen.getOrDefault(word, 0) + 1);
-
-                if (wordsSeen.get(word) > wordFreqMap.get(word)) break;
-
-                if (j + 1 == wordCount) { // perfect window
-                    res.add(i); // add beginning of the window that contains the right concatenated string
+                if (j + 1 == wordCount) {
+                    res.add(i);
                 }
             }
         }
-
         return res;
     }
 }

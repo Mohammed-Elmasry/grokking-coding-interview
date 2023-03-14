@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] $args) {
-        String input = "catfoxcat";
+        String input = "ascatfoxcat";
         String[] words = {"cat", "fox"};
 
         List<Integer> res = maxSumOfContiguousSubArrayK.findWordConcatenation(input, words);
