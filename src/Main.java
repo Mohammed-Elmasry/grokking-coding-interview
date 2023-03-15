@@ -13,10 +13,17 @@ public class Main {
 
 
         // problem 2
-        int[] input = {3, 4, 1, 1, 6};
-        int sum = 8;
+//        int[] input = {3, 4, 1, 1, 6};
+//        int sum = 8;
+//
+//        int res = Exercises.smallestSubarrayWithGivenSum(input, sum);
 
-        int res = Exercises.smallestSubarrayWithGivenSum(input, sum);
+
+        // problem 3
+        String str = "cbbebi";
+        int k = 3;
+
+        int res = Exercises.longestSubstringWithKDistinctCharacters(str, k);
         System.out.println(res);
     }
 }
