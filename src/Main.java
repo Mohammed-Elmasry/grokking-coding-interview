@@ -20,10 +20,21 @@ public class Main {
 
 
         // problem 3
-        String str = "cbbebi";
-        int k = 3;
+//        String str = "cbbebi";
+//        int k = 3;
 
-        int res = Exercises.longestSubstringWithKDistinctCharacters(str, k);
+//        int res = Exercises.longestSubstringWithKDistinctCharacters(str, k);
+
+
+        // problem 4
+//        char[] trees = {'A', 'B', 'C', 'B', 'B', 'C'};
+//
+//        int res = Exercises.fruitProblem(trees);
+
+
+        // problem 5
+        String input = "abccde";
+        int res = Exercises.noRepeatSubstring(input);
         System.out.println(res);
     }
 }

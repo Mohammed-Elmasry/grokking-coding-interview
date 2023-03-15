@@ -58,4 +58,45 @@ public class Exercises {
 
         return bestLength;
     }
+
+    public static int fruitProblem(char[] trees) {
+        int bestLength = Integer.MIN_VALUE;
+        int windowStart = 0;
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int windowEnd = 0; windowEnd < trees.length; windowEnd++) {
+            char rightChar = trees[windowEnd];
+            map.put(rightChar, map.getOrDefault(rightChar, 0) + 1);
+
+
+            while (map.size() > 2) { // more than k distinct characters
+                char leftChar = trees[windowStart++];
+                map.put(leftChar, map.get(leftChar) - 1);
+                map.remove(leftChar, 0);
+            }
+
+            bestLength = Math.max(bestLength, windowEnd - windowStart + 1);
+        }
+
+        return bestLength;
+    }
+
+    public static int noRepeatSubstring(String str) {
+        int bestLength = Integer.MIN_VALUE;
+        int windowStart = 0;
+        Map<Character, Integer> indexMap = new HashMap<>();
+
+        for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+            char rightChar = str.charAt(windowEnd);
+
+            if (indexMap.containsKey(rightChar))
+                windowStart = Math.max(windowStart, indexMap.get(rightChar) + 1);
+
+            indexMap.put(rightChar, windowEnd);
+
+            bestLength = Math.max(bestLength, windowEnd - windowStart + 1);
+        }
+
+        return bestLength;
+    }
 }
