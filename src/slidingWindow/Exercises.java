@@ -1,6 +1,8 @@
 package slidingWindow;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Exercises {
@@ -172,5 +174,34 @@ public class Exercises {
         }
 
         return false;
+    }
+
+    public static List<Integer> problemChallenge2(String str, String pattern) {
+        List<Integer> res = new ArrayList<>();
+        int matched = 0;
+        int windowStart = 0;
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (char chr : pattern.toCharArray())
+            map.put(chr, map.getOrDefault(chr, 0) + 1);
+
+        for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+            char rightChar = str.charAt(windowEnd);
+            if (map.containsKey(rightChar)) {
+                map.put(rightChar, map.get(rightChar) - 1);
+                if (map.get(rightChar) == 0) matched++;
+            }
+
+            if (matched == map.size()) res.add(windowStart);
+
+            if (windowEnd >= pattern.length() - 1) {
+                char leftChar = str.charAt(windowStart++);
+                if (map.containsKey(leftChar)) {
+                    if (map.get(leftChar) == 0) matched--;
+                    map.put(leftChar, map.get(leftChar) + 1);
+                }
+            }
+        }
+        return res;
     }
 }

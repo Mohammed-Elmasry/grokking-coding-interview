@@ -52,5 +52,11 @@ public class Main {
 //        String str = "aaacb";
 //        String pattern = "abc";
 //        boolean res = Exercises.problemChallenge1(str, pattern);
+
+
+        // problem 9
+//        String str = "abbcabc";
+//        String pattern = "abc";
+//        List<Integer> res = Exercises.problemChallenge2(str, pattern);
     }
 }
