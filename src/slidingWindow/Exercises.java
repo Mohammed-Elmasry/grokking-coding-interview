@@ -204,4 +204,45 @@ public class Exercises {
         }
         return res;
     }
+
+    public static String problemChallenge3(String str, String pattern) {
+        String res = ""; // needed if you're keeping the string
+        int bestStartIndex = 0; // no need if you're keeping the string
+        int matched = 0;
+        int windowStart = 0;
+        int bestLength = str.length() + 1;
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (char chr : pattern.toCharArray())
+            map.put(chr, map.getOrDefault(chr, 0) + 1);
+
+        for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+            char rightChar = str.charAt(windowEnd);
+            if (map.containsKey(rightChar)) {
+                map.put(rightChar, map.get(rightChar) - 1);
+                if (map.get(rightChar) == 0) matched++;
+            }
+
+            while (matched == map.size()) { // keep shrinking to optimize the length
+                // found a good window
+                if (bestLength > windowEnd - windowStart + 1) {
+                    bestLength = windowEnd - windowStart + 1;
+                    res = str.substring(windowStart, windowEnd + 1);
+                    // or
+                    bestStartIndex = windowStart;
+                }
+
+                char leftChar = str.charAt(windowStart++);
+                if (map.containsKey(leftChar)) {
+                    if (map.get(leftChar) == 0) matched--;
+                    map.put(leftChar, map.get(leftChar) + 1);
+                }
+            }
+        }
+
+        if (bestLength > str.length()) return "";
+        return res; // keep updating the string. or substring at the end once
+//        return str.substring(bestStartIndex, bestStartIndex + bestLength);
+    }
 }
