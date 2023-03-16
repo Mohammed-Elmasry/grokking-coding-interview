@@ -42,5 +42,10 @@ public class Main {
 //        int k = 1;
 
 //        int res = Exercises.longestSubstringWithSameLettersAfterReplacement(input, k);
+
+        // problem 7
+//        int[] nums = {0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1};
+//        int k = 3;
+//        int res = Exercises.longestSubarrayWithOnesAfterReplacement(nums, k);
     }
 }

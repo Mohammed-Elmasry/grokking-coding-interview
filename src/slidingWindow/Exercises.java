@@ -111,7 +111,7 @@ public class Exercises {
             freqMap.put(rightChar, freqMap.getOrDefault(rightChar, 0) + 1);
             mostFreqElementFrequency = Math.max(mostFreqElementFrequency, freqMap.get(rightChar));
 
-            if (windowEnd - windowStart + 1 - mostFreqElementFrequency > k){
+            if (windowEnd - windowStart + 1 - mostFreqElementFrequency > k) {
                 char leftChar = str.charAt(windowStart++);
                 freqMap.put(leftChar, freqMap.get(leftChar) - 1);
             }
@@ -119,6 +119,28 @@ public class Exercises {
             bestLength = Math.max(bestLength, windowEnd - windowStart + 1);
         }
 
+
+        return bestLength;
+    }
+
+    public static int longestSubarrayWithOnesAfterReplacement(int[] nums, int k) {
+        int bestLength = Integer.MIN_VALUE;
+        int windowStart = 0;
+        int onesFreq = 0;
+
+        for (int windowEnd = 0; windowEnd < nums.length; windowEnd++) {
+
+            if (nums[windowEnd] == 1)
+                onesFreq++;
+
+            if (windowEnd - windowStart + 1 - onesFreq > k){
+                // need to shrink
+                int leftNum = nums[windowStart++];
+                if (leftNum == 1) onesFreq--;
+            }
+
+            bestLength = Math.max(bestLength, windowEnd - windowStart + 1);
+        }
 
         return bestLength;
     }
