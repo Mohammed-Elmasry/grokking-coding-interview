@@ -245,4 +245,36 @@ public class Exercises {
         return res; // keep updating the string. or substring at the end once
 //        return str.substring(bestStartIndex, bestStartIndex + bestLength);
     }
+
+    public static List<Integer> problemChallenge4(String str, String[] words) {
+        int wordCount = words.length;
+        int wordLength = words[0].length();
+        int windowSize = wordCount * wordLength;
+        List<Integer> result = new ArrayList<>();
+        Map<String, Integer> wordMap = new HashMap<>();
+
+        for (String word : words)
+            wordMap.put(word, wordMap.getOrDefault(word, 0) + 1);
+
+        for (int i = 0; i < str.length() - windowSize + 1; i++) {
+            Map<String, Integer> seenWords = new HashMap<>();
+
+            for (int j = 0; j < words.length; j++) { // word by word
+                int nextWordIndex = i + j * wordLength;
+                String currentWord = str.substring(nextWordIndex, nextWordIndex + wordLength);
+
+                if (!wordMap.containsKey(currentWord)) break;
+
+                seenWords.put(currentWord, seenWords.getOrDefault(currentWord, 0) + 1);
+
+                if (seenWords.get(currentWord) > wordMap.get(currentWord)) break;
+            }
+
+            if (wordMap.size() == seenWords.size()) {
+                result.add(i);
+            }
+        }
+
+        return result;
+    }
 }

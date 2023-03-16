@@ -63,5 +63,10 @@ public class Main {
 //        String str = "aabdec";
 //        String pattern = "abc";
 //        String res = Exercises.problemChallenge3(str, pattern);
+
+        // problem 11
+//        String str = "catcatfoxfox";
+//        String[] words = {"cat", "fox"};
+//        List<Integer> res = Exercises.problemChallenge4(str, words);
     }
 }
