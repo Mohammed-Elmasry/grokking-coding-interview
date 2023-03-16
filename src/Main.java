@@ -33,8 +33,14 @@ public class Main {
 
 
         // problem 5
-        String input = "abccde";
-        int res = Exercises.noRepeatSubstring(input);
-        System.out.println(res);
+//        String input = "abccde";
+//        int res = Exercises.noRepeatSubstring(input);
+
+
+        // problem 6
+//        String input = "abccde";
+//        int k = 1;
+
+//        int res = Exercises.longestSubstringWithSameLettersAfterReplacement(input, k);
     }
 }

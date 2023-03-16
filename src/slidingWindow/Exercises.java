@@ -99,4 +99,27 @@ public class Exercises {
 
         return bestLength;
     }
+
+    public static int longestSubstringWithSameLettersAfterReplacement(String str, int k) {
+        int bestLength = Integer.MIN_VALUE;
+        int windowStart = 0;
+        int mostFreqElementFrequency = 0;
+        Map<Character, Integer> freqMap = new HashMap<>();
+
+        for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+            char rightChar = str.charAt(windowEnd);
+            freqMap.put(rightChar, freqMap.getOrDefault(rightChar, 0) + 1);
+            mostFreqElementFrequency = Math.max(mostFreqElementFrequency, freqMap.get(rightChar));
+
+            if (windowEnd - windowStart + 1 - mostFreqElementFrequency > k){
+                char leftChar = str.charAt(windowStart++);
+                freqMap.put(leftChar, freqMap.get(leftChar) - 1);
+            }
+
+            bestLength = Math.max(bestLength, windowEnd - windowStart + 1);
+        }
+
+
+        return bestLength;
+    }
 }
