@@ -47,5 +47,10 @@ public class Main {
 //        int[] nums = {0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1};
 //        int k = 3;
 //        int res = Exercises.longestSubarrayWithOnesAfterReplacement(nums, k);
+
+        // problem 8
+//        String str = "aaacb";
+//        String pattern = "abc";
+//        boolean res = Exercises.problemChallenge1(str, pattern);
     }
 }

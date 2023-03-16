@@ -133,7 +133,7 @@ public class Exercises {
             if (nums[windowEnd] == 1)
                 onesFreq++;
 
-            if (windowEnd - windowStart + 1 - onesFreq > k){
+            if (windowEnd - windowStart + 1 - onesFreq > k) {
                 // need to shrink
                 int leftNum = nums[windowStart++];
                 if (leftNum == 1) onesFreq--;
@@ -143,5 +143,34 @@ public class Exercises {
         }
 
         return bestLength;
+    }
+
+    public static boolean problemChallenge1(String str, String pattern) {
+        int windowStart = 0;
+        int matched = 0;
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (char chr : pattern.toCharArray())
+            map.put(chr, map.getOrDefault(chr, 0) + 1);
+
+        for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+            char rightChar = str.charAt(windowEnd);
+            if (map.containsKey(rightChar)) {
+                map.put(rightChar, map.get(rightChar) - 1);
+                if (map.get(rightChar) == 0) matched++;
+            }
+
+            if (matched == map.size()) return true;
+
+            if (windowEnd >= pattern.length() - 1) {
+                char leftChar = str.charAt(windowStart++);
+                if (map.containsKey(leftChar)) {
+                    if (map.get(leftChar) == 0) matched--;
+                    map.put(leftChar, map.get(leftChar) + 1);
+                }
+            }
+        }
+
+        return false;
     }
 }
