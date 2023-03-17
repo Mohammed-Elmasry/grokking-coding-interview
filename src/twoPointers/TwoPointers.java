@@ -39,4 +39,30 @@ public class TwoPointers {
 
         return new int[]{-1, -1};
     }
+
+//    public static int removeDuplicates(int[] nums) {
+//        int nextToChange = 1;
+//
+//        for (int next = 0; next < nums.length; next++) {
+//            if (nums[nextToChange - 1] != nums[next]) {
+//                nums[nextToChange] = nums[next];
+//                nextToChange++;
+//            }
+//        }
+//
+//        return nextToChange;
+//    }
+
+    public static int removeTarget(int[] nums, int target) {
+        int nextToRemove = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != target) {
+                nums[nextToRemove] = nums[i];
+                nextToRemove++;
+            }
+        }
+
+        return nextToRemove;
+    }
 }
