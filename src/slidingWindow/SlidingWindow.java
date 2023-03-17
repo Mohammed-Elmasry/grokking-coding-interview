@@ -3,7 +3,7 @@ package slidingWindow;
 import java.io.CharArrayReader;
 import java.util.*;
 
-public class maxSumOfContiguousSubArrayK {
+public class SlidingWindow {
     public static int calculateContiguousSubArrayMaxSum(int[] input, int k) {
         int bestSum = Integer.MIN_VALUE;
         int windowSum = 0;
