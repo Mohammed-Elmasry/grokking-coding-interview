@@ -65,4 +65,28 @@ public class TwoPointers {
 
         return nextToRemove;
     }
+
+    public static int[] getSquares(int[] nums) {
+        int[] result = new int[nums.length];
+        int resPtr = result.length - 1;
+
+        int left = 0;
+        int right = resPtr;
+
+        while (left < right) {
+            int leftVal = (int) Math.pow(nums[left], 2);
+            int rightVal = (int) Math.pow(nums[right], 2);
+
+            if (leftVal >= rightVal) {
+                result[resPtr] = leftVal;
+                left++;
+            } else {
+                result[resPtr] = rightVal;
+                right--;
+            }
+            resPtr--;
+        }
+
+        return result;
+    }
 }

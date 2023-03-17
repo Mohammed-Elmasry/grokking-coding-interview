@@ -4,10 +4,9 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] $args) {
-        int[] nums = {2, 3, 3, 3, 6, 9, 9};
-        int target = 2;
-        int res = TwoPointers.removeTarget(nums, target);
+        int[] nums = {-3, -1, 0, 1, 2};
+        int[] res = TwoPointers.getSquares(nums);
 
-        System.out.println(res);
+        System.out.println(Arrays.toString(res));
     }
 }
