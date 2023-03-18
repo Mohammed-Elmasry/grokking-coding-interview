@@ -5,10 +5,9 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] $args) {
-        int[] nums = {-3, 0, 1, 2, -1, 1, -2};
-//        int[] nums = {-5, 2, 2, -1, -2, 3};
-//        int[] nums = {-1, 0, 1, 2, -1, -4};
-        List<List<Integer>> res = TwoPointers.findTriplet(nums);
+        int[] nums = {1, 0, 1, 1};
+        int target = 100;
+        int res = TwoPointers.tripleSumCloseToTarget(nums, target);
 
         System.out.println(res);
     }

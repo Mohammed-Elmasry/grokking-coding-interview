@@ -117,4 +117,31 @@ public class TwoPointers {
         return new ArrayList<>(triplets);
     }
 
+
+    public static int tripleSumCloseToTarget(int[] nums, int target) {
+        Arrays.sort(nums);
+        int bestDifference = Integer.MAX_VALUE;
+        int bestSum = Integer.MIN_VALUE;
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left < right) {
+                int total = nums[i] + nums[left] + nums[right];
+                if (total - target == 0) {
+                    return total;
+                } else if (total - target > 0) {
+                    right--;
+                } else { // total - target < 0
+                    left++;
+                }
+                if (bestDifference > Math.abs(total - target))
+                    bestSum = total;
+                bestDifference = Math.min(bestDifference, Math.abs(total - target));
+            }
+        }
+        return bestSum;
+    }
 }
