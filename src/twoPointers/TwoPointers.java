@@ -1,5 +1,7 @@
 package twoPointers;
 
+import java.util.*;
+
 public class TwoPointers {
 
 //    public static int[] pairWithTargetSum(int[] nums, int target) {
@@ -89,4 +91,30 @@ public class TwoPointers {
 
         return result;
     }
+
+    public static List<List<Integer>> findTriplet(int[] arr) {
+        Arrays.sort(arr);
+        Set<List<Integer>> triplets = new HashSet<List<Integer>>();
+        for (int i = 0; i < arr.length - 2; i++) {
+            if (i > 0 && arr[i] == arr[i - 1]) continue;
+
+            int left = i + 1;
+            int right = arr.length - 1;
+
+            while (left < right) {
+                int total = arr[left] + arr[right] + arr[i];
+                if (total == 0) { // triplet found
+                    triplets.add(Arrays.asList(arr[i], arr[left], arr[right]));
+                    left++;
+                    right--;
+                } else if (total < 0) {
+                    left++;
+                } else
+                    right--;
+            }
+        }
+
+        return new ArrayList<>(triplets);
+    }
+
 }
