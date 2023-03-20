@@ -144,4 +144,27 @@ public class TwoPointers {
         }
         return bestSum;
     }
+
+    public static int tripletsWithSmallerSum(int[] arr, int target) {
+        Arrays.sort(arr);
+        int count = 0;
+
+        for (int i = 0; i < arr.length - 2; i++) {
+
+            int left = i + 1;
+            int right = arr.length - 1;
+
+            while (left < right) {
+
+                int total = arr[i] + arr[left] + arr[right];
+                if (total < target) {
+                    count += right - left;
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+        return count;
+    }
 }
