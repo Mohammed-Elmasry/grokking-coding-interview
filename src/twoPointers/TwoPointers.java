@@ -167,4 +167,27 @@ public class TwoPointers {
         }
         return count;
     }
+
+    public static List<List<Integer>> subArraysWithProductLessThanTarget(int[] arr, int target) {
+        List<List<Integer>> subarrays = new ArrayList<>();
+
+        int windowStart = 0;
+        int totalProduct = 1;
+
+        for (int windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+            totalProduct *= arr[windowEnd];
+
+            while (totalProduct >= target)
+                totalProduct /= arr[windowStart++];
+
+            List<Integer> tempList = new ArrayList<>();
+            for (int i = windowEnd; i >= windowStart; i--) {
+                tempList.add(0, arr[i]);
+                subarrays.add(new ArrayList<>(tempList));
+            }
+
+        }
+
+        return subarrays;
+    }
 }
