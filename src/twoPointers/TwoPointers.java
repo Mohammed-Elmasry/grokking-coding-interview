@@ -190,4 +190,26 @@ public class TwoPointers {
 
         return subarrays;
     }
+
+    public static void sort(int[] arr) {
+        int low = 0;
+        int high = arr.length - 1;
+
+        for (int i = 0; i <= high; ) {
+            if (arr[i] == 0) {
+                // swap with low and increment low
+                int temp = arr[low];
+                arr[low] = arr[i];
+                arr[i] = temp;
+                low++;
+            } else if (arr[i] == 2) {
+                int temp = arr[high];
+                arr[high] = arr[i];
+                arr[i] = temp;
+                high--;
+            } else {
+                i++;
+            }
+        }
+    }
 }
