@@ -1,8 +1,7 @@
 package twoPointers;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Exercises {
     public static int[] twoSum(int[] arr, int target) {
@@ -74,5 +73,26 @@ public class Exercises {
         }
 
         return res;
+    }
+
+    public static List<List<Integer>> tripleSumToZero(int[] arr) {
+        Arrays.sort(arr);
+        Set<List<Integer>> triplets = new HashSet<>();
+
+        for (int i = 0; i < arr.length - 2; i++) {
+            if (i > 0 && arr[i] == arr[i - 1]) continue;
+
+            Map<Integer, Integer> map = new HashMap<>();
+            int complement = -arr[i];
+            for (int j = i + 1; j < arr.length; j++) {
+
+                if (map.containsKey(complement - arr[j])) {
+                    triplets.add(new ArrayList<>(Arrays.asList(arr[i], complement - arr[j], arr[j])));
+                } else {
+                    map.put(arr[j], j);
+                }
+            }
+        }
+        return new ArrayList<>(triplets);
     }
 }
