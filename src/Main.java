@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] $args) {
-        int[] nums = {2, 2, 2, 11};
-        int res = Exercises.removeDuplicates(nums);
+        int[] nums = {-2, -1, 0, 2, 3};
+        int[] res = Exercises.squareSortedArray(nums);
 
-        System.out.println(res);
+        System.out.println(Arrays.toString(res));
 
     }
 }

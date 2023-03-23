@@ -50,4 +50,29 @@ public class Exercises {
         }
         return nextToChange;
     }
+
+    public static int[] squareSortedArray(int[] arr) {
+        Arrays.sort(arr);
+        int[] res = new int[arr.length];
+
+        int resPointer = res.length - 1;
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left < right) {
+            int leftSquare = (int) Math.pow(arr[left], 2);
+            int rightSquare = (int) Math.pow(arr[right], 2);
+
+            if (leftSquare <= rightSquare) {
+                res[resPointer] = rightSquare;
+                right--;
+            } else {
+                res[resPointer] = leftSquare;
+                left++;
+            }
+            resPointer--;
+        }
+
+        return res;
+    }
 }
