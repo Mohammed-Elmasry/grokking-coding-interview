@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] $args) {
-        int[] nums = {2, 5, 9, 11};
-        int target = 11;
-        int[] res = Exercises.twoSum(nums, target);
+        int[] nums = {1, 2, 3, 4, 6};
+        int target = 6;
+        int[] res = Exercises.twoSumWithHashMap(nums, target);
 
         System.out.println(Arrays.toString(res));
 
