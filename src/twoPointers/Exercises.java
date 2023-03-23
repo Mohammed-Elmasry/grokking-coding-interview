@@ -40,13 +40,13 @@ public class Exercises {
 
     public static int removeDuplicates(int[] arr) {
         Arrays.sort(arr);
-        int nextToChange = 0;
+        int nextToChange = 1;
 
-        for (int i = 0; i < arr.length; i++) {
-            while (i < arr.length - 1 && arr[i] == arr[i + 1]) i++;
-
-            arr[nextToChange] = arr[i];
-            nextToChange++;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] != arr[nextToChange - 1]) {
+                arr[nextToChange] = arr[i];
+                nextToChange++;
+            }
         }
         return nextToChange;
     }
