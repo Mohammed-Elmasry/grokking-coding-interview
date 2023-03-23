@@ -213,7 +213,33 @@ public class TwoPointers {
         }
     }
 
-//    public static List<List<Integer>> fourSum(int[] arr, int target) {
-//
-//    }
+    public static List<List<Integer>> fourSum(int[] arr, int target) {
+        Arrays.sort(arr);
+        Set<List<Integer>> quads = new HashSet<>();
+
+        for (int i = 0; i < arr.length - 3; i++) {
+
+            for (int j = i + 1; j < arr.length - 2; j++) {
+
+                int left = j + 1;
+                int right = arr.length - 1;
+
+                while (left < right) {
+                    int total = arr[i] + arr[j] + arr[left] + arr[right];
+
+                    if (total > target) {
+                        right--;
+                    } else if (total < target) {
+                        left++;
+                    } else {
+                        quads.add(Arrays.asList(arr[i], arr[j], arr[left], arr[right]));
+                        left++;
+                        right--;
+                    }
+                }
+            }
+        }
+
+        return new ArrayList<>(quads);
+    }
 }
