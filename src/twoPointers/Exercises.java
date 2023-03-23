@@ -37,4 +37,17 @@ public class Exercises {
         }
         return new int[]{-1, -1};
     }
+
+    public static int removeDuplicates(int[] arr) {
+        Arrays.sort(arr);
+        int nextToChange = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            while (i < arr.length - 1 && arr[i] == arr[i + 1]) i++;
+
+            arr[nextToChange] = arr[i];
+            nextToChange++;
+        }
+        return nextToChange;
+    }
 }

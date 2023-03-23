@@ -6,11 +6,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] $args) {
-        int[] nums = {1, 2, 3, 4, 6};
-        int target = 6;
-        int[] res = Exercises.twoSumWithHashMap(nums, target);
+        int[] nums = {2, 3, 3, 3, 6, 9, 9};
+        int res = Exercises.removeDuplicates(nums);
 
-        System.out.println(Arrays.toString(res));
+        System.out.println(res);
 
     }
 }
