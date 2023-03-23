@@ -124,4 +124,35 @@ public class Exercises {
 
         return triplets;
     }
+
+    public static int tripletSumClosestToTarget(int[] arr, int target) {
+        Arrays.sort(arr);
+        int bestDiff = Integer.MAX_VALUE;
+        int bestSum = Integer.MAX_VALUE;
+
+        for (int i = 0; i < arr.length - 2; i++) {
+            if (i > 0 && arr[i] == arr[i - 1]) continue;
+
+            int left = i + 1;
+            int right = arr.length - 1;
+
+            while (left < right) {
+                int total = arr[i] + arr[left] + arr[right];
+
+                if (total - target == 0) {
+                    return total;
+                } else if (total - target > 0) {
+                    right--;
+                } else {
+                    left++;
+                }
+
+                if (bestDiff > Math.abs(target - total)) {
+                    bestSum = total;
+                }
+                bestDiff = Math.min(bestDiff, Math.abs(target - total));
+            }
+        }
+        return bestSum;
+    }
 }
