@@ -155,4 +155,49 @@ public class Exercises {
         }
         return bestSum;
     }
+
+    public static boolean problemChallenge2(String str1, String str2) {
+        // setup
+        int leftPtr = str1.length() - 1;
+        int rightPtr = str2.length() - 1;
+
+        int leftCounter = 0;
+        int rightCounter = 0;
+
+        while (leftPtr > -1 || rightPtr > -1) {
+            while (leftPtr >= 0) {
+                if (str1.charAt(leftPtr) == '#') {
+                    leftCounter++;
+                } else if (leftCounter > 0) {
+                    leftCounter--;
+                } else {
+                    break;
+                }
+                leftPtr--;
+            }
+
+            while (rightPtr >= 0) {
+                if (str2.charAt(rightPtr) == '#') {
+                    rightCounter++;
+                } else if (rightCounter > 0) {
+                    rightCounter--;
+                } else {
+                    break;
+                }
+                rightPtr--;
+            }
+
+            // compare stable characters
+            if (leftPtr < 0 && rightPtr < 0) return true;
+
+            if (leftPtr < 0 || rightPtr < 0) return false;
+
+            if (str1.charAt(leftPtr) != str2.charAt(rightPtr)) return false;
+
+            leftPtr--;
+            rightPtr--;
+        }
+
+        return true;
+    }
 }
