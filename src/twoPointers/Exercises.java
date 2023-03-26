@@ -200,4 +200,33 @@ public class Exercises {
 
         return true;
     }
+
+    public static int problemChallenge3(int[] arr) {
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left < arr.length - 1 && arr[left] <= arr[left + 1])
+            left++;
+
+        if (left == arr.length - 1) // array is already sorted
+            return 0;
+
+        while (right > 0 && arr[right] >= arr[right - 1])
+            right--;
+
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        for (int k = left; k <= right; k++) {
+            max = Math.max(max, arr[k]);
+            min = Math.min(min, arr[k]);
+        }
+
+        while (left > 0 && arr[left - 1] > min)
+            left--;
+
+        while (right < arr.length - 1 && arr[right + 1] < max)
+            right++;
+
+        return right - left + 1;
+    }
 }
