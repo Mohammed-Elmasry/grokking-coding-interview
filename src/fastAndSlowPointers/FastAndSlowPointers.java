@@ -1,6 +1,7 @@
 package fastAndSlowPointers;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class FastAndSlowPointers {
@@ -107,5 +108,42 @@ public class FastAndSlowPointers {
         }
 
         return slow;
+    }
+
+    public static boolean isPalindromeLinkedList(Node head) {
+        Node fast = head;
+        Node slow = head;
+        Node newSlow = head;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        // reverse second half of the list
+        Node newHead = reverseList(slow);
+        Node newMiddle = newHead;
+
+        while (newSlow != null && newMiddle != null) {
+            if (newSlow.val != newMiddle.val) return false;
+            newSlow = newSlow.next;
+            newMiddle = newMiddle.next;
+        }
+
+        reverseList(newHead);
+
+        return true;
+    }
+
+    private static Node reverseList(Node head) {
+        Node prev = null;
+        while (head != null) {
+            Node next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+
+        return prev;
     }
 }
