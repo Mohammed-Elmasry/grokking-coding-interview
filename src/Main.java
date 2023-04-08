@@ -7,9 +7,20 @@ import java.util.List;
 public class Main {
     public static void main(String[] $args) {
 
-        int number = 23;
-        boolean res = FastAndSlowPointers.isHappyNumber(number);
+        Node head = new Node(2);
+        head.next = new Node(3);
+        head.next.next = new Node(4);
+        head.next.next.next = new Node(5);
 
-        System.out.println(res);
+        Node res = FastAndSlowPointers.findMiddle(head);
+        System.out.println(res.val);
+
+        head.next.next.next.next = new Node(6);
+        res = FastAndSlowPointers.findMiddle(head);
+        System.out.println(res.val);
+
+        head.next.next.next.next.next = new Node(7);
+        res = FastAndSlowPointers.findMiddle(head);
+        System.out.println(res.val);
     }
 }
