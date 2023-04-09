@@ -7,16 +7,15 @@ import java.util.List;
 public class Main {
     public static void main(String[] $args) {
 
-        Node head = new Node(1);
-        head.next = new Node(2);
-        head.next.next = new Node(1);
-//        head.next.next.next = new Node(2);
-        head.next.next.next.next = new Node(1);
-//        head.next.next.next.next.next = new Node(6);
+        Node head = new Node(2);
+        head.next = new Node(4);
+        head.next.next = new Node(6);
+        head.next.next.next = new Node(8);
+        head.next.next.next.next = new Node(10);
+//        head.next.next.next.next.next = new Node(12);
 
-        boolean res = FastAndSlowPointers.isPalindromeLinkedList(head);
+        FastAndSlowPointers.rearrange(head);
 
-        System.out.println(res);
         LinkedList.printList(head);
     }
 }

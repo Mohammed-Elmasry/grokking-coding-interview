@@ -146,4 +146,29 @@ public class FastAndSlowPointers {
 
         return prev;
     }
+
+    public static void rearrange(Node head) {
+        Node fast = head;
+        Node slow = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        Node rightHead = reverseList(slow);
+
+        Node lnext = head.next;
+        Node rnext = rightHead.next;
+
+        while (lnext != null && rnext != null) {
+            head.next = rightHead;
+            head = lnext;
+            lnext = lnext.next;
+
+            rightHead.next = head;
+            rightHead = rnext;
+            rnext = rnext.next;
+        }
+    }
 }
